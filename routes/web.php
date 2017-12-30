@@ -10,8 +10,14 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
+//JN:add
+Route::get('/', 'HomeController@index')->name('home'); //JN
+Route::group(['prefix' => 'admin'], function() {
+    Route::resource('product', 'Backend\ProductController',[
+        'except' => [/*'create', 'show'*/]
+    ]);
+});
+//JN:end
 // Home page route
 
 //Route::get('/', 'PagesController@index')->name('index');
@@ -19,7 +25,6 @@
 // Home page authenticated
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/', 'HomeController@index')->name('home'); //JN
 
 // Admin route
 

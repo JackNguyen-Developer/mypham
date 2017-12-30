@@ -25,6 +25,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        //JN:171228:crud-generator
+        if ($this->app->environment() == 'local') {
+            $this->app->register('Appzcoder\CrudGenerator\CrudGeneratorServiceProvider');
+        }
     }
 }

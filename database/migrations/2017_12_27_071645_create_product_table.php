@@ -24,13 +24,13 @@ class CreateProductTable extends Migration
             $table->integer('review')->nullable();
             $table->integer('order_sort')->unsigned()->default(1);
             $table->integer('status')->unsigned()->default(0);
-            $table->integer('category_id')->unsigned();
+            //$table->integer('category_id')->unsigned();
             $table->integer('brand_id')->unsigned();
 
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('category_id')->references('id')->on('category')->onUpdate('cascade')->onDelete('cascade');
+            //$table->foreign('category_id')->references('id')->on('category')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('brand_id')->references('id')->on('brand')->onUpdate('cascade')->onDelete('cascade');
         });
     }
