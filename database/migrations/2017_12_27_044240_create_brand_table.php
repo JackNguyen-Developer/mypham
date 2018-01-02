@@ -18,6 +18,7 @@ class CreateBrandTable extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('note')->nullable();
+            $table->string('thumbnail');
             $table->integer('order_sort')->unsigned()->default(1);
             $table->integer('status')->unsigned()->default(0);
             $table->timestamps();

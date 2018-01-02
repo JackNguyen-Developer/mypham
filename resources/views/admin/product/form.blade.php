@@ -33,27 +33,32 @@
         {!! $errors->first('price', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-<div class="form-group {{ $errors->has('thumbnail') ? 'has-error' : ''}}">
-    <label for="thumbnail" class="col-md-4 control-label">{{ 'Thumbnail' }}</label>
+<div class="form-group {{ $errors->has('thumbnails') ? 'has-error' : ''}}">
+    <label for="thumbnails" class="col-md-4 control-label">{{ 'Thumbnails' }}</label>
     <div class="col-md-6">
-        <input class="form-control" name="thumbnail" type="text" id="thumbnail" value="{{ $product->thumbnail or ''}}" >
-        {!! $errors->first('thumbnail', '<p class="help-block">:message</p>') !!}
+        <input class="form-control" name="thumbnails[]" type="file" id="thumbnails" multiple="multiple" {{--value="{{ $product->thumbnails or ''}}"--}} >
+        {{--<span class="btn btn-primary">--}}
+            {{--Browse… {!! Form::file('thumbnails', array('style'=>'display:none;', 'id'=>'thumbnails', 'onchange'=>'change(thumbnail)')) !!}--}}
+        {{--</span>--}}
+        {!! $errors->first('thumbnails', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-<div class="form-group {{ $errors->has('review') ? 'has-error' : ''}}">
-    <label for="review" class="col-md-4 control-label">{{ 'Review' }}</label>
-    <div class="col-md-6">
-        <input class="form-control" name="review" type="number" id="review" value="{{ $product->review or ''}}" >
-        {!! $errors->first('review', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
-<div class="form-group {{ $errors->has('order_sort') ? 'has-error' : ''}}">
-    <label for="order_sort" class="col-md-4 control-label">{{ 'Order Sort' }}</label>
-    <div class="col-md-6">
-        <input class="form-control" name="order_sort" type="number" id="order_sort" value="{{ $product->order_sort or ''}}" >
-        {!! $errors->first('order_sort', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
+
+{{--<div class="form-group {{ $errors->has('review') ? 'has-error' : ''}}">--}}
+    {{--<label for="review" class="col-md-4 control-label">{{ 'Review' }}</label>--}}
+    {{--<div class="col-md-6">--}}
+        {{--<input class="form-control" name="review" type="number" id="review" value="{{ $product->review or ''}}" >--}}
+        {{--{!! $errors->first('review', '<p class="help-block">:message</p>') !!}--}}
+    {{--</div>--}}
+{{--</div>--}}
+
+{{--<div class="form-group {{ $errors->has('order_sort') ? 'has-error' : ''}}">--}}
+    {{--<label for="order_sort" class="col-md-4 control-label">{{ 'Order Sort' }}</label>--}}
+    {{--<div class="col-md-6">--}}
+        {{--<input class="form-control" name="order_sort" type="number" id="order_sort" value="{{ $product->order_sort or ''}}" >--}}
+        {{--{!! $errors->first('order_sort', '<p class="help-block">:message</p>') !!}--}}
+    {{--</div>--}}
+{{--</div>--}}
 
 {{--<div class="form-group {{ $errors->has('status') ? 'has-error' : ''}}">--}}
     {{--<label for="status" class="col-md-4 control-label">{{ 'Status' }}</label>--}}
@@ -65,21 +70,21 @@
 <div class="form-group {{ $errors->has('status') ? 'has-error' : ''}}">
     {!! Form::label('status', 'Status', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::select('active', ['Hidden', 'Show'], null, ['class' => 'form-control']) !!}
-        {!! $errors->first('active', '<p class="help-block">:message</p>') !!}
+        {!! Form::select('status', ['Hidden', 'Show'], null, ['class' => 'form-control']) !!}
+        {!! $errors->first('status', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 
-<div class="form-group {{ $errors->has('brand') ? 'has-error' : ''}}">
-    <label for="brand" class="col-md-4 control-label">{{ 'Brand' }}</label>
-    <div class="col-md-6">
-        <input class="form-control" name="brand" type="text" id="brand" value="{{ $product->brand or ''}}" >
-        {!! $errors->first('brand', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
+{{--<div class="form-group {{ $errors->has('brand') ? 'has-error' : ''}}">--}}
+    {{--<label for="brand" class="col-md-4 control-label">{{ 'Brand' }}</label>--}}
+    {{--<div class="col-md-6">--}}
+        {{--<input class="form-control" name="brand" type="text" id="brand" value="{{ $product->brand or ''}}" >--}}
+        {{--{!! $errors->first('brand', '<p class="help-block">:message</p>') !!}--}}
+    {{--</div>--}}
+{{--</div>--}}
 <div class="form-group {{ $errors->has('brand_id') ? 'has-error' : ''}}">
-    {!! Form::label('brand_id', 'Brand', ['class' => '']) !!}
-    <div class="">
+    {!! Form::label('brand_id', 'Brand', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-6">
         {!! Form::select('brand_id', $brands, null, ['class' => 'form-control']) !!}
         {!! $errors->first('brand_id', '<p class="help-block">:message</p>') !!}
     </div>
@@ -90,10 +95,10 @@
     <div class="col-md-6">
         @foreach($categories as $item)
             @php
-                $checked = '';//is_numeric(array_search($c['id'].'-'.$t['id'], $courseTypeArr)) ? true : false;
+                $checked = ( isset($product_category) && is_numeric( array_search($item->id, $product_category) ) ) ? true : false;
             @endphp
             <div class="checkbox">
-                <label>{!! Form::checkbox('product_category[]', $item->title, $checked) !!} {{$item->title}}</label><br>
+                <label>{!! Form::checkbox('product_category[]', $item->id, $checked) !!} {{$item->title}}</label><br>
             </div>
         @endforeach
 

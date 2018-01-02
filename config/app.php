@@ -181,6 +181,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        App\Providers\MyServiceProvider::class,//JN:myHelper:171107
+
     ],
 
     /*
@@ -235,6 +237,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
 
+        'MyHelpers' => App\Helpers\MyHelper::class,//JN:myHelpers:171107
     ],
 
 ];

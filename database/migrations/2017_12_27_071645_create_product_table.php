@@ -19,7 +19,7 @@ class CreateProductTable extends Migration
             $table->string('slug')->unique();
             $table->text('info')->nullable();
             $table->text('description');
-            $table->string('thumbnails');
+            $table->text('thumbnails');
             $table->integer('price')->unsigned();
             $table->integer('review')->nullable();
             $table->integer('order_sort')->unsigned()->default(1);
