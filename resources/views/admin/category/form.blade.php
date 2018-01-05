@@ -31,9 +31,9 @@
 </div>
 
 <div class="form-group {{ $errors->has('category_parent') ? 'has-error' : ''}}">
-    <label for="category_parent" class="col-md-4 control-label">{{ 'Category parent' }}</label>
+    <label for="category_parent" class="col-md-4 control-label">{{ 'Pick parent' }}</label>
     <div class="col-md-6">
-        @foreach($category_parent as $item)
+        @foreach($categories as $item)
             @php
                 $checked = ( isset($category_parent) && is_numeric( array_search($item->id, $category_parent) ) ) ? true : false;
             @endphp
@@ -46,9 +46,9 @@
 </div>
 
 <div class="form-group {{ $errors->has('category_child') ? 'has-error' : ''}}">
-    <label for="category_child" class="col-md-4 control-label">{{ 'Category child' }}</label>
+    <label for="category_child" class="col-md-4 control-label">{{ 'Pick child' }}</label>
     <div class="col-md-6">
-        @foreach($category_child as $item)
+        @foreach($categories as $item)
             @php
                 $checked = ( isset($category_child) && is_numeric( array_search($item->id, $category_child) ) ) ? true : false;
             @endphp
