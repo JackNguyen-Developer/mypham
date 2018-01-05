@@ -40,7 +40,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.create');
+        $categories = Category::all();//Category::pluck('title', 'id')->toArray();
+        return view( 'admin.category.create', [ 'categories' => $categories ] );//, 'category_parent' => $categories, 'category_child' => $categories
     }
 
     /**
@@ -54,8 +55,20 @@ class CategoryController extends Controller
     {
         
         $requestData = $request->all();
-        
-        Category::create($requestData);
+
+        $category_parent = $requestData['category_parent'];
+        $category_child = $requestData['category_child'];
+
+        $newCategory = Category::create($requestData);
+        $newId = $newCategory->id;
+        if($newId && $category_parent){
+            foreach ($category_parent as $item){
+                DB::table('category_child')->insert([
+                    'parent_id' => $newId,
+                    'child_id' => $item
+                ]);
+            }
+        }
 
         return redirect('admin/category')->with('flash_message', 'Category added!');
     }
