@@ -8,22 +8,25 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UserRequest;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class User extends Authenticatable
 {
-    use Notifiable, OwnsRecord, HasModelTrait;
+    use Notifiable, OwnsRecord, HasModelTrait, EntrustUserTrait;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name',
-                           'email',
-                           'is_subscribed',
-                           'is_admin',
-                           'status_id',
-                           'password'];
+    protected $fillable = [
+        'name',
+        'email',
+        'is_subscribed',
+        'is_admin',
+        'status_id',
+        'password'
+    ];
 
     /**
      * The attributes that should be hidden for arrays.

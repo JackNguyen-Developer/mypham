@@ -182,7 +182,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         App\Providers\MyServiceProvider::class,//JN:myHelper:171107
-
+        Zizaco\Entrust\EntrustServiceProvider::class,//JN:
     ],
 
     /*
@@ -238,6 +238,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
 
         'MyHelpers' => App\Helpers\MyHelper::class,//JN:myHelpers:171107
+        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,//JN:
     ],
 
 ];

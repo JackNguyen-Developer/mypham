@@ -9,6 +9,6 @@ class Brand extends Model
     protected $table = 'brand';
 
     protected $fillable = [
-        'title', 'slug', 'note', 'order_sort', 'status'
+        'title', 'slug', 'note', 'thumbnail', 'order_sort', 'status'
     ];
 }

@@ -16,6 +16,12 @@ Route::group(['prefix' => 'admin'], function() {
     Route::resource('product', 'Backend\ProductController',[
         'except' => [/*'create', 'show'*/]
     ]);
+    Route::resource('brand', 'Backend\BrandController',[
+        'except' => [/*'create', 'show'*/]
+    ]);
+    Route::resource('category', 'Backend\CategoryController',[
+        'except' => [/*'create', 'show'*/]
+    ]);
 });
 //JN:end
 // Home page route

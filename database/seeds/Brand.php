@@ -17,7 +17,8 @@ class Brand extends Seeder
                 [
                     'title' => $t,
                     'slug' => $t . rand(1,50),
-                    'status' => 1
+                    'status' => 1,
+                    'thumbnail' => 'default.jpg'
                 ]
             ]);
         }
