@@ -24,11 +24,6 @@ Route::group(['prefix' => 'admin'], function() {
     ]);
 });
 //JN:end
-
-Route::get('hello1', function() {
-	echo "Phạm Minh Ánh đã push";
-    //
-});
 // Home page route
 
 //Route::get('/', 'PagesController@index')->name('index');
