@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use DB;
 use App\Category;
 use Illuminate\Http\Request;
 
@@ -61,8 +61,18 @@ class CategoryController extends Controller
 
         $newCategory = Category::create($requestData);
         $newId = $newCategory->id;
+
         if($newId && $category_parent){
             foreach ($category_parent as $item){
+                DB::table('category_child')->insert([
+                    'parent_id' => $item,
+                    'child_id' => $newId
+                ]);
+            }
+        }
+
+        if($newId && $category_child){
+            foreach ($category_child as $item){
                 DB::table('category_child')->insert([
                     'parent_id' => $newId,
                     'child_id' => $item
@@ -97,8 +107,11 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::findOrFail($id);
+        $categories = Category::where('id', '<>', $id)->get();
+        $parent_selected = DB::table('category_child')->where('parent_id', $id)->pluck('child_id')->toArray();
+        $child_selected =  DB::table('category_child')->where('child_id', $id)->pluck('parent_id')->toArray();
 
-        return view('admin.category.edit', compact('category'));
+        return view('admin.category.edit', ['category' => $category, 'categories' => $categories, 'parent' => $parent_selected, 'child' => $child_selected]);
     }
 
     /**
@@ -116,6 +129,49 @@ class CategoryController extends Controller
         
         $category = Category::findOrFail($id);
         $category->update($requestData);
+
+        $category_parent = $requestData['category_parent'];
+        $category_child = $requestData['category_child'];
+
+        if($category_parent){
+            $parentOlds = DB::table('category_child')->where('parent_id', $id)->pluck('child_id')->toArray();
+            $parentNews = $category_parent;
+            $oldDiff = array_diff($parentOlds, $parentNews);
+            if($oldDiff){
+                foreach ($oldDiff as $item){
+                    DB::table('category_child')->where(['parent_id' => $id, 'child_id' => $item])->delete();
+                }
+            }
+            $newDiff = array_diff($parentNews, $parentOlds);
+            if($newDiff){
+                foreach ($newDiff as $item) {
+                    DB::table('category_child')->insert([
+                        'parent_id' => $id,
+                        'child_id' => $item
+                    ]);
+                }
+            }
+        }
+
+        if($category_child){
+            $old = DB::table('category_child')->where('child_id', $id)->pluck('parent_id')->toArray();
+            $new = $category_child;
+            $oldDiff = array_diff($old, $new);
+            if($oldDiff){
+                foreach ($oldDiff as $item){
+                    DB::table('category_child')->where(['parent_id' => $item, 'child_id' => $id])->delete();
+                }
+            }
+            $newDiff = array_diff($new, $old);
+            if($newDiff){
+                foreach ($newDiff as $item) {
+                    DB::table('category_child')->insert([
+                        'parent_id' => $item,
+                        'child_id' => $id
+                    ]);
+                }
+            }
+        }
 
         return redirect('admin/category')->with('flash_message', 'Category updated!');
     }
