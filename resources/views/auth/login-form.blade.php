@@ -1,5 +1,5 @@
 <form  method="POST"
-       action="{{ url('/login') }}">
+       action="{{ url('/login-admin') }}">
 
        {{ csrf_field() }}
 

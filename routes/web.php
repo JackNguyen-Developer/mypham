@@ -51,7 +51,7 @@ Route::get('api/widget-data', 'ApiController@widgetData');
 // Authentication routes
 
 Route::get('login', 'Auth\AuthController@showLoginForm')->name('login');
-Route::post('login', 'Auth\AuthController@login');
+Route::post('login-admin', 'Auth\AuthController@login');
 Route::post('logout', 'Auth\AuthController@logout')->name('logout');
 
 // MarketingImages routes

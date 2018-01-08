@@ -5,11 +5,14 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\brand;
+use App\Brand;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
+    public $path_file = 'brand';
+    public $path_thumb = 'brand/thumbnails';
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -25,9 +28,9 @@ class BrandController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $brand = brand::paginate($perPage);
+            $brand = Brand::paginate($perPage);
         } else {
-            $brand = brand::paginate($perPage);
+            $brand = Brand::paginate($perPage);
         }
 
         return view('admin.brand.index', compact('brand'));
@@ -52,12 +55,26 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        
         $requestData = $request->all();
-        
-        brand::create($requestData);
+        if($request->hasFile('thumbnail')) {
+            $file = $request->file('thumbnail');
+            $name_not_ext = str_slug( strtolower( trim( pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) ) ) );
+            $ext = $file->getClientOriginalExtension();//strtolower( trim( pathinfo($f->getClientOriginalName(), PATHINFO_EXTENSION) ) );
+            $full_name = $name_not_ext . '-' . time() . '.' . $ext;
 
-        return redirect('admin/brand')->with('flash_message', 'brand added!');
+            //die(var_dump($full_name));
+            if($file->storeAs($this->path_thumb, $full_name)) {
+                $requestData['thumbnail'] = $full_name;
+                Brand::create($requestData);
+                return redirect('admin/brand')->with('flash_message', 'brand added!');
+            }
+            Session::flash('danger', 'Error:71');
+            return redirect()->back();
+            
+        } else {
+            Session::flash('danger', 'File not selected');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -69,7 +86,7 @@ class BrandController extends Controller
      */
     public function show($id)
     {
-        $brand = brand::findOrFail($id);
+        $brand = Brand::findOrFail($id);
 
         return view('admin.brand.show', compact('brand'));
     }
@@ -83,7 +100,7 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
-        $brand = brand::findOrFail($id);
+        $brand = Brand::findOrFail($id);
 
         return view('admin.brand.edit', compact('brand'));
     }
@@ -98,10 +115,32 @@ class BrandController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
         $requestData = $request->all();
-        
-        $brand = brand::findOrFail($id);
+        $brand = Brand::findOrFail($id);
+        $requestData['slug'] = str_slug( $requestData['slug'] );
+
+        if($request->hasFile('thumbnail')) {
+            //delete old img
+            $img = $brand->thumbnail;
+            if(file_exists(public_path() . '/imgs/' . $this->path_thumb . '/' . $img))
+                unlink(public_path() . '/imgs/' . $this->path_thumb . '/' . $img);
+            //save new imgs
+            $file = $request->file('thumbnail');
+            //handle file to save
+
+            //handle name of img
+            $name_not_ext = str_slug( strtolower( trim( pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) ) ) );
+            $ext = $file->getClientOriginalExtension();//strtolower( trim( pathinfo($f->getClientOriginalName(), PATHINFO_EXTENSION) ) );
+            $full_name = $name_not_ext . '-' . time() . '.' . $ext;
+
+            //die(var_dump($full_name));
+            if ($file->storeAs($this->path_thumb, $full_name)) {
+                $requestData['thumbnail'] = $full_name;
+                \MyHelpers::createThumbnail( $this->path_thumb, $full_name );
+            }
+        } else
+            $requestData['thumbnail'] = $brand->thumbnail;
+
         $brand->update($requestData);
 
         return redirect('admin/brand')->with('flash_message', 'brand updated!');
@@ -116,7 +155,7 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        brand::destroy($id);
+        Brand::destroy($id);
 
         return redirect('admin/brand')->with('flash_message', 'brand deleted!');
     }

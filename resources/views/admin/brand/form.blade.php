@@ -22,19 +22,33 @@
         <input class="form-control" name="order_sort" type="number" id="order_sort" value="{{ $brand->order_sort or ''}}" >
         {!! $errors->first('order_sort', '<p class="help-block">:message</p>') !!}
     </div>
-</div><div class="form-group {{ $errors->has('status') ? 'has-error' : ''}}">
-    <label for="status" class="col-md-4 control-label">{{ 'Status' }}</label>
+</div>
+
+<div class="form-group {{ $errors->has('status') ? 'has-error' : ''}}">
+    {!! Form::label('status', 'Status', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        <input class="form-control" name="status" type="number" id="status" value="{{ $brand->status or ''}}" >
+        {!! Form::select('status', ['Hidden', 'Show'], null, ['class' => 'form-control']) !!}
         {!! $errors->first('status', '<p class="help-block">:message</p>') !!}
     </div>
-</div><div class="form-group {{ $errors->has('thumbnail') ? 'has-error' : ''}}">
+</div>
+
+<div class="form-group {{ $errors->has('thumbnail') ? 'has-error' : ''}}">
     <label for="thumbnail" class="col-md-4 control-label">{{ 'Thumbnail' }}</label>
     <div class="col-md-6">
-        <input class="form-control" name="thumbnail" type="text" id="thumbnail" value="{{ $brand->thumbnail or ''}}" >
+        <input class="form-control" name="thumbnail" type="file" id="thumbnail" {{--value="{{ $product->thumbnails or ''}}"--}} >
+        {{--<span class="btn btn-primary">--}}
+        {{--Browse… {!! Form::file('thumbnails', array('style'=>'display:none;', 'id'=>'thumbnails', 'onchange'=>'change(thumbnail)')) !!}--}}
+        {{--</span>--}}
         {!! $errors->first('thumbnail', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
+{{--<div class="form-group {{ $errors->has('thumbnail') ? 'has-error' : ''}}">--}}
+    {{--<label for="thumbnail" class="col-md-4 control-label">{{ 'Thumbnail' }}</label>--}}
+    {{--<div class="col-md-6">--}}
+        {{--<input class="form-control" name="thumbnail" type="text" id="thumbnail" value="{{ $brand->thumbnail or ''}}" >--}}
+        {{--{!! $errors->first('thumbnail', '<p class="help-block">:message</p>') !!}--}}
+    {{--</div>--}}
+{{--</div>--}}
 
 <div class="form-group">
     <div class="col-md-offset-4 col-md-4">

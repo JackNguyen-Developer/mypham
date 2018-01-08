@@ -22,10 +22,12 @@
         <input class="form-control" name="order_sort" type="number" id="order_sort" value="{{ $category->order_sort or ''}}" >
         {!! $errors->first('order_sort', '<p class="help-block">:message</p>') !!}
     </div>
-</div><div class="form-group {{ $errors->has('status') ? 'has-error' : ''}}">
-    <label for="status" class="col-md-4 control-label">{{ 'Status' }}</label>
+</div>
+
+<div class="form-group {{ $errors->has('status') ? 'has-error' : ''}}">
+    {!! Form::label('status', 'Status', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        <input class="form-control" name="status" type="number" id="status" value="{{ $category->status or ''}}" >
+        {!! Form::select('status', ['Hidden', 'Show'], null, ['class' => 'form-control']) !!}
         {!! $errors->first('status', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -35,7 +37,7 @@
     <div class="col-md-6">
         @foreach($categories as $item)
             @php
-                $checked = ( isset($category_parent) && is_numeric( array_search($item->id, $category_parent) ) ) ? true : false;
+                $checked = ( isset($parent) && is_numeric( array_search($item->id, $parent) ) ) ? true : false;
             @endphp
             <div class="checkbox">
                 <label>{!! Form::checkbox('category_parent[]', $item->id, $checked) !!} {{$item->title}}</label><br>
@@ -50,7 +52,7 @@
     <div class="col-md-6">
         @foreach($categories as $item)
             @php
-                $checked = ( isset($category_child) && is_numeric( array_search($item->id, $category_child) ) ) ? true : false;
+                $checked = ( isset($child) && is_numeric( array_search($item->id, $child) ) ) ? true : false;
             @endphp
             <div class="checkbox">
                 <label>{!! Form::checkbox('category_child[]', $item->id, $checked) !!} {{$item->title}}</label><br>
