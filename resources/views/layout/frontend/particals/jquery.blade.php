@@ -12,3 +12,4 @@
 <script type="text/javascript" src="{{asset('/public/frontend/js/rev-slider.js')}}"></script>
 <script type="text/javascript" src="{{asset('/public/frontend/js/slider.js')}}"></script>
 <script type="text/javascript" src="{{asset('/public/frontend/js/deal_time.js')}}"></script>
+<script type="text/javascript" src="{{asset('/public/frontend/js/jquery_frontend.js')}}"></script>

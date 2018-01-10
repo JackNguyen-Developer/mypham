@@ -5,6 +5,15 @@ namespace App\Http\Controllers\cfrontend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\UpdatePasswordFrontendRequest;
+use App\Http\Requests\UpdateRegisterFrontendRequest;
+use App\User;
+use App\Http\Requests\LoginFrontRequest;
+use Hash;
+use App\Category;
+use Lang;
+// use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class WebbanhangController extends Controller
 {
@@ -85,19 +94,175 @@ class WebbanhangController extends Controller
 
 	public function postRegister(RegisterRequest $request)
 	{
+		$input =$request->all();
+
+		$user =new User;
+		$user->name =$request->get('name');
+		$user->email =$request->get('email');
+		$user->phone =$request->get('phone');
+		$user->password =Hash::make($request->get('password'));
+		$user->address =$request->get('address');
+		$result = $user->save();
+		if ($result)
+		{
+
+			$request->session()->flash('success',"Bạn đã đăng ký thành công");
+
+			return redirect()->back()->withInput();
+			
+		}
+		else
+		{
+			$request->session()->flash('warning',"Bạn đã đăng ký chưa thành công ");
+
+			return redirect()->back()->withInput();
+
+		}
 		
 
-		return redirect()->back()->withInput();
+
+		// return redirect()->back()->withInput();
 
 	}
 	
-	public function postLogin(Request $request)
+	public function postLogin(LoginFrontRequest $request)
 	{
 		
-		return redirect()->back()->withInput();
+		$remember = ($request->get('remember')) ? true : false;
+		$data=[
+			'email'=> $request->get('email_lo'),
+			'password'=>($request->get('password_lo')),
+			
+		];
+
+// var_dump($request->all());
+// exit();
 
 
-	}
+		if (Auth::attempt($data,$remember))
+			{
+				return redirect()->route('/home_frontend');
+			}
+
+			else
+			{
+				$msg ="Xin lỗi chúng tôi chưa xác định được lỗi này ";
+				$checkemail = User::where('email',$request->get('email_lo'))->get()->toArray();
+
+
+				if ($checkemail == NULL)
+				 {
+					$msg ="Email ".$request->get('email_lo')." không tồn tại trong hệ thống";
+				} else 
+				{
+					$msg = "Bạn Nhập sai mật khẩu vui lòng nhập mật khẩu khác .";
+				}
+				
+				
+				
+				$request->session()->flash('warninglogin',$msg);
+				return redirect()->back()->withInput();
+			}
+
+
+
+
+		}
+
+		public function postLogoutFrontend()
+		{
+			Auth::logout();
+			return redirect()->back();
+
+		}
+
+		public function postUpdateRegister(UpdateRegisterFrontendRequest $request)
+		{
+
+			$user =User::find(Auth::id());
+			$user->name =$request->get('name');
+			$user->phone =$request->get('phone');
+			$user->address =$request->get('address');
+			$result = $user->save();
+			if ($result)
+			{
+
+				$request->session()->flash('success',"Bạn đã cập nhật thông tin thành công");
+
+				return redirect()->back()->withInput();
+
+			}
+			else
+			{
+				$request->session()->flash('warning',"Bạn cập nhật thông tin chưa thành công");
+
+				return redirect()->back()->withInput();
+
+			}
+
+
+
+
+
+
+		}
+
+		public function postUpdatePassword(UpdatePasswordFrontendRequest $request)
+		{
+
+			$user =User::find(Auth::id());
+			$user->password =Hash::make($request->get('password'));
+			$result = $user->save();
+
+			if ($result)
+			{
+
+				$request->session()->flash('successpass',"Bạn đã thanh đổi mật khẩu thành công ");
+
+				return redirect()->back()->withInput();
+
+			}
+			else
+			{
+				$request->session()->flash('warningpass',"Thay đổi mật khẩu của bạn chưa thành công");
+
+				return redirect()->back()->withInput();
+
+			}
+
+
+
+		}
+
+
+		public function getShowCategory()
+		{
+
+			$menu =Category::where('level',1)->get();
+
+			foreach ($menu as $key => $menu) 
+			{
+				echo $menu->title."</br>";
+
+				foreach ($menu->categoryparent as $key => $parent)
+				 {
+					echo "---".$parent->title."</br>";
+
+
+					foreach ($parent->categorychild as $key => $child) 
+					{
+						echo "******************".$child->title."</br>";
+
+						# code...
+					}
+					# code...
+				}
+				
+			}
+
+
+
+		}
 
 
 
@@ -111,4 +276,4 @@ class WebbanhangController extends Controller
 
 
     //
-}
+	}

@@ -17,6 +17,10 @@ Route::get('/quick_view.html','cfrontend\WebbanhangController@index')->name('qui
 Route::get('/single_product.html','cfrontend\WebbanhangController@getSingleProduct')->name('single_product');
 Route::post('/register','cfrontend\WebbanhangController@postRegister')->name('postregister');
 Route::post('/login_frontend','cfrontend\WebbanhangController@postLogin')->name('postlogin');
+Route::post('/frontend-logout','cfrontend\WebbanhangController@postLogoutFrontend')->name('logout_frontend');
 
+Route::post('/postupdateregister','cfrontend\WebbanhangController@postUpdateRegister')->name('postupdateregister');
+Route::post('/postUpdatePassword','cfrontend\WebbanhangController@postUpdatePassword')->name('postUpdatePassword');
 
+Route::get('show_category','cfrontend\WebbanhangController@getShowCategory');
  ?>

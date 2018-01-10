@@ -80,7 +80,7 @@ class MyHelper
         $width = 600;
         //$height = 400;
         $path = public_path( 'imgs/' . $public_file_name );
-        $path_img = $path . "\\" . $img_name;
+        $path_img = $path . "/" . $img_name;
         $file_info = pathinfo($path_img);
         $size = getimagesize($path_img);//Index 0 and 1 contains respectively the width and the height of the image.
         //$width_src = $size[0];

@@ -47,7 +47,27 @@
                                                     </ul>
                                                 </div>
                                             </li>
+
+                                            @if(!Auth::check())
                                             <li> <a href="account_page.html"><span class="hidden-xs">Log In</span></a> </li>
+                                            @else
+                                            <li>
+                                                <div class="dropdown block-company-wrapper hidden-xs"> <a role="button" data-toggle="dropdown" data-target="#" class="block-company dropdown-toggle" href="/account_page.html">{{Auth::user()->name}} <span class="caret"></span></a>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a href="/account_page.html"><i class="login-fa fa fa-user-circle-o"></i> Information</a> </li>
+                                                        <li>
+                                                            <form id="frontend-logout-form" action="{{route('logout_frontend')}}" method="POST" style="display: none;">
+                                                            {{csrf_field()}}
+                                                            </form>
+                                                            <a href="#" onclick="event.preventDefault(); document.getElementById('frontend-logout-form').submit();" ><i class="login-fa fa fa-sign-out"></i>Logout</a> </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+
+                      
+
+
+                                            @endif
                                         </ul>
                                     </div>
                                 </div>
@@ -73,50 +93,50 @@
                                                             <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                                                             <p class="product-name"><a href="#">Product Title Here</a> </p>
                                                             <strong>1</strong> x <span class="price">$79.99</span> </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="item">
+                                                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="/public/frontend/images/products/img02.jpg"> </a>
+                                                            <div class="product-details">
+                                                                <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
+                                                                <p class="product-name"><a href="#">Product Title Here</a> </p>
+                                                                <strong>1</strong> x <span class="price">$88.89</span> </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="item last">
+                                                            <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="/public/frontend/images/products/img04.jpg"> </a>
+                                                                <div class="product-details">
+                                                                    <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
+                                                                    <p class="product-name"><a href="#">Product Title Here</a> </p>
+                                                                    <strong>1</strong> x <span class="price">$85.99</span> </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                        <!--actions-->
+                                                        <div class="actions">
+                                                            <button class="btn-checkout" title="Checkout" type="button" onClick="checkout.html"><span>Checkout</span> </button>
+                                                            <a href="shopping_cart.html" class="view-cart"><span>View Cart</span></a> </div>
+                                                        </div>
                                                     </div>
-                                                </li>
-                                                <li class="item">
-                                                    <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="/public/frontend/images/products/img02.jpg"> </a>
-                                                        <div class="product-details">
-                                                            <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
-                                                            <p class="product-name"><a href="#">Product Title Here</a> </p>
-                                                            <strong>1</strong> x <span class="price">$88.89</span> </div>
-                                                    </div>
-                                                </li>
-                                                <li class="item last">
-                                                    <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="/public/frontend/images/products/img04.jpg"> </a>
-                                                        <div class="product-details">
-                                                            <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
-                                                            <p class="product-name"><a href="#">Product Title Here</a> </p>
-                                                            <strong>1</strong> x <span class="price">$85.99</span> </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                            <!--actions-->
-                                            <div class="actions">
-                                                <button class="btn-checkout" title="Checkout" type="button" onClick="checkout.html"><span>Checkout</span> </button>
-                                                <a href="shopping_cart.html" class="view-cart"><span>View Cart</span></a> </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-4 col-sm-4 col-xs-12 jtv-logo-box">
+                                            <!-- Header Logo -->
+                                            <div class="logo">
+                                                <h1><a title="eCommerce" href="index.html"><img alt="eCommerce" src="/public/frontend/images/logo.png"> </a></h1>
+                                            </div>
+                                            <!-- End Header Logo -->
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 hidden-xs">
+                                            <div class="search-box">
+                                                <form action="cat" method="POST" id="search_mini_form" name="Categories">
+                                                    <input type="text" placeholder="Search here..." value="" maxlength="70" name="search" id="search">
+                                                    <button type="button" class="search-btn-bg"><span class="glyphicon glyphicon-search"></span>&nbsp;</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6 col-md-4 col-sm-4 col-xs-12 jtv-logo-box">
-                            <!-- Header Logo -->
-                            <div class="logo">
-                                <h1><a title="eCommerce" href="index.html"><img alt="eCommerce" src="/public/frontend/images/logo.png"> </a></h1>
-                            </div>
-                            <!-- End Header Logo -->
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 hidden-xs">
-                            <div class="search-box">
-                                <form action="cat" method="POST" id="search_mini_form" name="Categories">
-                                    <input type="text" placeholder="Search here..." value="" maxlength="70" name="search" id="search">
-                                    <button type="button" class="search-btn-bg"><span class="glyphicon glyphicon-search"></span>&nbsp;</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
+                        </header>
