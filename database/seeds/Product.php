@@ -11,17 +11,17 @@ class Product extends Seeder
      */
     public function run()
     {
-        for($i = 0; $i <= 10; $i++){
-            $t = 'Product test ' . rand(1,50);
+        for($i = 0; $i <= 1000; $i++){
+            $t = 'Product test- ' . $i;
             DB::table('product')->insert([
                 [
                     'name' => $t,
-                    'slug' => $t . rand(1,50),
+                    'slug' => "slug-product-test-" . $i,
                     'info' => '<p>Item Code: #12345678</p><p>Availability: <span class="in-stock">In stock</span></p><p>Condition: New</p>',
-                    'description' => 'update late',
+                    'description' => 'update late-'.rand(10,100),
                     'thumbnails' => '["a.jpg","b.jpg","c.jpg"]',
-                    'price' => 100,
-                    'review' => 1,
+                    'price' =>rand(50000,300000),
+                    'review' => rand(1,50),
                     'brand_id' => rand(1, 10),
                     'status' => 1
                 ]

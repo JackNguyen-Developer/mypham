@@ -11,11 +11,11 @@ class ProductCategory extends Seeder
      */
     public function run()
     {
-        for($i = 0; $i <= 5; $i++){
+        for($i = 0; $i <=2000; $i++){
             DB::table('product_category')->insert([
                 [
-                    'product_id' => rand(1,10),
-                    'category_id' => rand(1,10)
+                    'product_id' => rand(1,1000),
+                    'category_id' => rand(111,1000)
                 ]
             ]);
         }

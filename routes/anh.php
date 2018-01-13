@@ -1,6 +1,6 @@
 <?php 
-Route::get('/','cfrontend\WebbanhangController@index')->name('/');
-Route::get('/index.html','cfrontend\WebbanhangController@index')->name('/');
+Route::get('/','cfrontend\WebbanhangController@index')->name('/home_frontend');
+Route::get('/index.html','cfrontend\WebbanhangController@index')->name('/home_frontend');
 Route::get('/shop_list.html','cfrontend\WebbanhangController@getShoplist')->name('shop_list');
 Route::get('/shopping_cart.html','cfrontend\WebbanhangController@getShoppingcart')->name('shopping_cart');
 Route::get('/about_us.html','cfrontend\WebbanhangController@getAboutus')->name('about-us');
@@ -16,7 +16,11 @@ Route::get('/blog_single_post.html','cfrontend\WebbanhangController@getBlogSingP
 Route::get('/quick_view.html','cfrontend\WebbanhangController@index')->name('quick_view');
 Route::get('/single_product.html','cfrontend\WebbanhangController@getSingleProduct')->name('single_product');
 Route::post('/register','cfrontend\WebbanhangController@postRegister')->name('postregister');
-Route::post('/login','cfrontend\WebbanhangController@postLogin')->name('postlogin');
+Route::post('/login_frontend','cfrontend\WebbanhangController@postLogin')->name('postlogin');
+Route::post('/frontend-logout','cfrontend\WebbanhangController@postLogoutFrontend')->name('logout_frontend');
 
+Route::post('/postupdateregister','cfrontend\WebbanhangController@postUpdateRegister')->name('postupdateregister');
+Route::post('/postUpdatePassword','cfrontend\WebbanhangController@postUpdatePassword')->name('postUpdatePassword');
 
+Route::get('show_category','cfrontend\WebbanhangController@getShowCategory');
  ?>

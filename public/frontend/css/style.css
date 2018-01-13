@@ -194,8 +194,8 @@ small {
 	vertical-align: middle;
 }
 .modal-open .modal {
-	background: none repeat scroll 0 0 rgba(0, 0, 0, 0.6);
-	display: none !important;
+/*	background: none repeat scroll 0 0 rgba(0, 0, 0, 0.6);
+	display: none !important;*/
 }
 /* Buttons */
 button {

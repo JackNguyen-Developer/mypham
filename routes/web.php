@@ -28,11 +28,6 @@ Route::group(['prefix' => 'handle'], function() {
     Route::post('/handle-cart', 'CardController@handleCart')->name('cart.handle');
 });
 //JN:end
-
-Route::get('hello1', function() {
-	echo "Phạm Minh Ánh đã push";
-    //
-});
 // Home page route
 
 //Route::get('/', 'PagesController@index')->name('index');

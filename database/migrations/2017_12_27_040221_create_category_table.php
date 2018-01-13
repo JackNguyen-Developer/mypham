@@ -20,6 +20,7 @@ class CreateCategoryTable extends Migration
             $table->text('note')->nullable();
             $table->integer('order_sort')->unsigned()->default(1);
             $table->integer('status')->unsigned()->default(0);
+            $table->integer('level')->unsigned();
             $table->timestamps();
             $table->softDeletes();
         });

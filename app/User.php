@@ -25,7 +25,8 @@ class User extends Authenticatable
         'is_subscribed',
         'is_admin',
         'status_id',
-        'password'
+        'password',
+        
     ];
 
     /**
@@ -36,7 +37,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
+public $timestamps = true;
     public function updateUser($user, UserRequest $request)
     {
 
