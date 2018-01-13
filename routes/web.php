@@ -23,6 +23,10 @@ Route::group(['prefix' => 'admin'], function() {
         'except' => [/*'create', 'show'*/]
     ]);
 });
+Route::group(['prefix' => 'handle'], function() {
+    Route::get('/get-product-json-for-cart/{id}', 'CardController@getProductDetail')->name('product.json');
+    Route::post('/handle-cart', 'CardController@handleCart')->name('cart.handle');
+});
 //JN:end
 
 Route::get('hello1', function() {

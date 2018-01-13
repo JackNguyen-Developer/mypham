@@ -30,71 +30,74 @@
                     <th class="action"><i class="fa fa-trash-o"></i></th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td class="cart_product"><a href="#"><img src="/public/frontend/images/products/img02.jpg" alt="Product"></a></td>
-                    <td class="cart_description"><p class="product-name"><a href="#"> Product Title Here </a></p>
-                      <small class="cart_ref">SKU : #987654</small><br>
-                      <small><a href="#">Color : Pink</a></small><br></td>
-                    <td class="cart_avail"><span class="label label-success">In stock</span></td>
-                    <td class="price"><span>$99.00</span></td>
-                    <td class="qty"><input class="form-control input-sm" type="text" value="1">
-                      <a href="#"><i class="fa fa-plus"></i></a> <a href="#"><i class="fa fa-minus"></i></a></td>
-                    <td class="price"><span>$99.00</span></td>
-                    <td class="action"><a href="#">Delete item</a></td>
-                  </tr>
-                  <tr>
-                    <td class="cart_product"><a href="#"><img src="/public/frontend/images/products/img03.jpg" alt="Product"></a></td>
-                    <td class="cart_description"><p class="product-name"><a href="#"> Product Title Here </a></p>
-                      <small class="cart_ref">SKU : #123654999</small><br>
-                      <small><a href="#">Color : Orange</a></small><br></td>
-                    <td class="cart_avail"><span class="label label-success">In stock</span></td>
-                    <td class="price"><span>$49.00</span></td>
-                    <td class="qty"><input class="form-control input-sm" type="text" value="2">
-                      <a href="#"><i class="fa fa-plus"></i></a> <a href="#"><i class="fa fa-minus"></i></a></td>
-                    <td class="price"><span>$98.00</span></td>
-                    <td class="action"><a href="#">Delete item</a></td>
-                  </tr>
-                  <tr>
-                    <td class="cart_product"><a href="#"><img src="/public/frontend/images/products/img04.jpg" alt="Product"></a></td>
-                    <td class="cart_description"><p class="product-name"><a href="#"> Product Title Here </a></p>
-                      <small class="cart_ref">SKU : #123654999</small><br>
-                      <small><a href="#">Color : Red</a></small><br></td>
-                    <td class="cart_avail"><span class="label label-success">In stock</span></td>
-                    <td class="price"><span>$89.00</span></td>
-                    <td class="qty"><input class="form-control input-sm" type="text" value="1">
-                      <a href="#"><i class="fa fa-plus"></i></a> <a href="#"><i class="fa fa-minus"></i></a></td>
-                    <td class="price"><span>$89.00</span></td>
-                    <td class="action"><a href="#">Delete item</a></td>
-                  </tr>
-                  <tr>
-                    <td class="cart_product"><a href="#"><img src="/public/frontend/images/products/img08.jpg" alt="Product"></a></td>
-                    <td class="cart_description"><p class="product-name"><a href="#"> Product Title Here </a></p>
-                      <small class="cart_ref">SKU : #123654999</small><br>
-                      <small><a href="#">Color : Grey</a></small><br></td>
-                    <td class="cart_avail"><span class="label label-success">In stock</span></td>
-                    <td class="price"><span>$69.00</span></td>
-                    <td class="qty"><input class="form-control input-sm" type="text" value="1">
-                      <a href="#"><i class="fa fa-plus"></i></a> <a href="#"><i class="fa fa-minus"></i></a></td>
-                    <td class="price"><span>$69.00</span></td>
-                    <td class="action"><a href="#">Delete item</a></td>
-                  </tr>
+                <tbody id="content_cart">
+                  {{--<tr>--}}
+                    {{--<td class="cart_product"><a href="#"><img src="/public/frontend/images/products/img02.jpg" alt="Product"></a></td>--}}
+                    {{--<td class="cart_description"><p class="product-name"><a href="#"> Product Title Here </a></p>--}}
+                      {{--<small class="cart_ref">SKU : #987654</small><br>--}}
+                      {{--<small><a href="#">Color : Pink</a></small><br></td>--}}
+                    {{--<td class="cart_avail"><span class="label label-success">In stock</span></td>--}}
+                    {{--<td class="price"><span>$99.00</span></td>--}}
+                    {{--<td class="qty"><input class="form-control input-sm" type="text" value="1">--}}
+                      {{--<a href="#"><i class="fa fa-plus"></i></a> <a href="#"><i class="fa fa-minus"></i></a></td>--}}
+                    {{--<td class="price"><span>$99.00</span></td>--}}
+                    {{--<td class="action"><a href="#">Delete item</a></td>--}}
+                  {{--</tr>--}}
+                  {{--<tr>--}}
+                    {{--<td class="cart_product"><a href="#"><img src="/public/frontend/images/products/img03.jpg" alt="Product"></a></td>--}}
+                    {{--<td class="cart_description"><p class="product-name"><a href="#"> Product Title Here </a></p>--}}
+                      {{--<small class="cart_ref">SKU : #123654999</small><br>--}}
+                      {{--<small><a href="#">Color : Orange</a></small><br></td>--}}
+                    {{--<td class="cart_avail"><span class="label label-success">In stock</span></td>--}}
+                    {{--<td class="price"><span>$49.00</span></td>--}}
+                    {{--<td class="qty"><input class="form-control input-sm" type="text" value="2">--}}
+                      {{--<a href="#"><i class="fa fa-plus"></i></a> <a href="#"><i class="fa fa-minus"></i></a></td>--}}
+                    {{--<td class="price"><span>$98.00</span></td>--}}
+                    {{--<td class="action"><a href="#">Delete item</a></td>--}}
+                  {{--</tr>--}}
+                  {{--<tr>--}}
+                    {{--<td class="cart_product"><a href="#"><img src="/public/frontend/images/products/img04.jpg" alt="Product"></a></td>--}}
+                    {{--<td class="cart_description"><p class="product-name"><a href="#"> Product Title Here </a></p>--}}
+                      {{--<small class="cart_ref">SKU : #123654999</small><br>--}}
+                      {{--<small><a href="#">Color : Red</a></small><br></td>--}}
+                    {{--<td class="cart_avail"><span class="label label-success">In stock</span></td>--}}
+                    {{--<td class="price"><span>$89.00</span></td>--}}
+                    {{--<td class="qty"><input class="form-control input-sm" type="text" value="1">--}}
+                      {{--<a href="#"><i class="fa fa-plus"></i></a> <a href="#"><i class="fa fa-minus"></i></a></td>--}}
+                    {{--<td class="price"><span>$89.00</span></td>--}}
+                    {{--<td class="action"><a href="#">Delete item</a></td>--}}
+                  {{--</tr>--}}
+                  {{--<tr>--}}
+                    {{--<td class="cart_product"><a href="#"><img src="/public/frontend/images/products/img08.jpg" alt="Product"></a></td>--}}
+                    {{--<td class="cart_description"><p class="product-name"><a href="#"> Product Title Here </a></p>--}}
+                      {{--<small class="cart_ref">SKU : #123654999</small><br>--}}
+                      {{--<small><a href="#">Color : Grey</a></small><br></td>--}}
+                    {{--<td class="cart_avail"><span class="label label-success">In stock</span></td>--}}
+                    {{--<td class="price"><span>$69.00</span></td>--}}
+                    {{--<td class="qty"><input class="form-control input-sm" type="text" value="1">--}}
+                      {{--<a href="#"><i class="fa fa-plus"></i></a> <a href="#"><i class="fa fa-minus"></i></a></td>--}}
+                    {{--<td class="price"><span>$69.00</span></td>--}}
+                    {{--<td class="action"><a href="#">Delete item</a></td>--}}
+                  {{--</tr>--}}
                 </tbody>
                 <tfoot>
                   <tr>
                     <td colspan="2" rowspan="2"></td>
                     <td colspan="3">Total products (tax incl.)</td>
-                    <td colspan="2">$355.00</td>
+                    <td colspan="2" class="cart_total_price">$355.00</td>
                   </tr>
                   <tr>
                     <td colspan="3"><strong>Total</strong></td>
-                    <td colspan="2"><strong>$355.00</strong></td>
+                    <td colspan="2" class="cart_total_price"><strong>$355.00</strong></td>
                   </tr>
                 </tfoot>
               </table>
               <div class="cart_navigation">
-                <button class="button continue-shopping" title="Continue shopping" type="button"><span>Continue shopping</span></button>
-                <button class="button btn-proceed-checkout" title="Proceed to Checkout" type="button"><span>Proceed to Checkout</span></button>
+                <form method="post" action="/handle/handle-cart">
+                  <input type="hidden" name="_token" value="{{  csrf_token() }}">
+                  <button class="button continue-shopping" title="Continue shopping" type="button"><span>Continue shopping</span></button>
+                  <button class="button btn-proceed-checkout" title="Proceed to Checkout" type="submit"><span>Proceed to Checkout</span></button>
+                </form>
               </div>
             </div>
           </div>

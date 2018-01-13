@@ -16,5 +16,6 @@
 <!-- <link rel="stylesheet" href="/public/frontend/style.css"> -->
 <link rel="stylesheet" href="{{asset('/public/frontend/style.css')}}">
 
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 
 </head>

@@ -88,7 +88,7 @@ class ProductController extends Controller
                 'info' => $request->get('info'),
                 'description' => $request->get('description'),
                 'status' => $request->get('status'),
-                'thumbnails' => serialize($thumbnails),
+                'thumbnails' => base64_encode(serialize($thumbnails)),
                 'price' => $request->get('price'),
                 'brand_id' => $request->get('brand_id')
             ];
@@ -164,11 +164,15 @@ class ProductController extends Controller
         $requestData['slug'] = str_slug( $requestData['slug'] );
         if($request->hasFile('thumbnails')) {
             //delete old img
-            $arr_img = unserialize( $product->thumbnails );
-            foreach ($arr_img as $item){
-                if(file_exists(public_path() . '/imgs/' . $this->path_thumb . '/' . $item))
-                    unlink(public_path() . '/imgs/' . $this->path_thumb . '/' . $item);
-            }
+            try{
+                $arr_img = @unserialize( base64_decode($product->thumbnails) );
+                if($arr_img)
+                    foreach ($arr_img as $item){
+                        if(file_exists(public_path() . '/imgs/' . $this->path_thumb . '/' . $item))
+                            unlink(public_path() . '/imgs/' . $this->path_thumb . '/' . $item);
+                    }
+            }catch(ErrorException $ex){}
+
             //save new imgs
             $files = $request->file('thumbnails');
 
@@ -187,7 +191,7 @@ class ProductController extends Controller
                 }
             }
 
-            $requestData['thumbnails'] = serialize($thumbnails);
+            $requestData['thumbnails'] = base64_encode( serialize($thumbnails) );
         } else
             $requestData['thumbnails'] = $product->thumbnails;
 
