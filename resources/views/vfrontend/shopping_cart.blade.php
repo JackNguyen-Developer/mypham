@@ -93,11 +93,11 @@
                 </tfoot>
               </table>
               <div class="cart_navigation">
-                <form method="post" action="/handle/handle-cart">
-                  <input type="hidden" name="_token" value="{{  csrf_token() }}">
+                {{--<form method="post" action="/handle/handle-cart">--}}
+                  {{--<input type="hidden" name="_token" value="{{  csrf_token() }}">--}}
                   <button class="button continue-shopping" title="Continue shopping" type="button"><span>Continue shopping</span></button>
-                  <button class="button btn-proceed-checkout" title="Proceed to Checkout" type="submit"><span>Proceed to Checkout</span></button>
-                </form>
+                  <button onclick="return handleCart();" id="cart_submit" class="button btn-proceed-checkout" title="Proceed to Checkout"><span>Proceed to Checkout</span></button>
+                {{--</form>--}}
               </div>
             </div>
           </div>

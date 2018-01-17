@@ -19,7 +19,7 @@ class Product extends Seeder
                     'slug' => "slug-product-test-" . $i,
                     'info' => '<p>Item Code: #12345678</p><p>Availability: <span class="in-stock">In stock</span></p><p>Condition: New</p>',
                     'description' => 'update late-'.rand(10,100),
-                    'thumbnails' => '["a.jpg","b.jpg","c.jpg"]',
+                    'thumbnails' => 'YToyOntpOjA7czozNjoiMjAxNy0xMi0wNi0yLTI3LTAyLXBtLTE1MTU0Njk1NzYucG5nIjtpOjE7czozNjoiMjAxNy0xMi0wNi00LTAyLTAxLXBtLTE1MTU0Njk1NzgucG5nIjt9',
                     'price' =>rand(50000,300000),
                     'review' => rand(1,50),
                     'brand_id' => rand(1, 10),

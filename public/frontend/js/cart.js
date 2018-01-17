@@ -43,17 +43,47 @@ $(document).ready(function(){
 });
 
 function handleCart(){
+    var values = getCookies('cosmetic.cart');
+    if(values == '' || values == undefined || values == null) return alert('Không có sản phẩm nào trong giỏ hàng');
+    var json = {};
+    for(var i = 0; i < values.length; i++){
+        var items = values[i].split('||');
+        json[items[0]] = items[4];
+    }
+    //console.log(JSON.stringify(json));
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    $('#cart_submit').attr('disabled', true);
     $.post(
         '/handle/handle-cart',
         {
             _token: CSRF_TOKEN,
+            json_data : JSON.stringify(json)
         },
         function(data, status){
-            console.log(data);
+            var json_data = JSON.parse(data);
+            var info = json_data.msg
+            for(var i = 0; i < info.length; i++){
+                delCookie(info[i].id);
+            }
+            console.log(json_data.total_price);
         }
     );
+
+    return false;
 }
+
+// function handleCart(){
+//     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+//     $.post(
+//         '/handle/handle-cart',
+//         {
+//             _token: CSRF_TOKEN,
+//         },
+//         function(data, status){
+//             console.log(data);
+//         }
+//     );
+// }
 
 function addProductToCart(id, num){
     var full_name = 'cosmetic.cart.' + id;

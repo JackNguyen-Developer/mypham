@@ -101,7 +101,7 @@
                                             </ul>
                                             <!--actions-->
                                             <div class="actions">
-                                                <button onclick="addProductToCart(1,1)" class="btn-checkout" title="Checkout" type="button" onClick="checkout.html"><span>Checkout</span> </button>
+                                                <button onclick="addProductToCart(2,1)" class="btn-checkout" title="Checkout" type="button" onClick="checkout.html"><span>Checkout</span> </button>
                                                 <a  href="shopping_cart.html" class="view-cart"><span>View Cart</span></a>
                                             </div>
                                                 <button onclick=" delCookie(1) ">Test del</button>

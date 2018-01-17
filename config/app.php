@@ -38,7 +38,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -183,6 +183,7 @@ return [
 
         App\Providers\MyServiceProvider::class,//JN:myHelper:171107
         Zizaco\Entrust\EntrustServiceProvider::class,//JN:
+        Barryvdh\Debugbar\ServiceProvider::class,//JN:debug
     ],
 
     /*
@@ -239,6 +240,7 @@ return [
 
         'MyHelpers' => App\Helpers\MyHelper::class,//JN:myHelpers:171107
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,//JN:
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,//JN:debug
     ],
 
 ];
